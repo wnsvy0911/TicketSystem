@@ -96,6 +96,7 @@ namespace TicketSystem
                 string choice;
                 do
                 {
+                    logger.Info("Tickets in file {Count}", TicketIds.Count);
                     // display choices to user
                     Console.WriteLine("1) Read data from CSV file");
                     Console.WriteLine("2) Create file from data");
