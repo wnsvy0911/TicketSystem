@@ -33,6 +33,24 @@ namespace TicketSystem
                 List<string> Submitter = new List<string>();
                 List<string> Assigned = new List<string>();
                 List<string> Watching = new List<string>();
+                 // to populate the lists with data, read from the data file
+                try
+                {
+                    StreamReader sr = new StreamReader(file);
+                    // first line contains column headers
+                    sr.ReadLine();
+                    while (!sr.EndOfStream)
+                    {
+                        string line = sr.ReadLine();
+                        Console.WriteLine(line);
+                    }
+                    sr.Close();
+                }
+                catch (Exception ex)
+                {
+                    logger.Error(ex.Message);
+                }
+
 
                 string choice;
                 do
