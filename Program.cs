@@ -8,6 +8,8 @@ namespace TicketSystem
 {
     class Program
     {
+        // create static instance of Logger
+        private static NLog.Logger logger = NLogBuilder.ConfigureNLog(Directory.GetCurrentDirectory() + "\\nlog.config").GetCurrentClassLogger();
         static void Main(string[] args)
         {
             string path = Directory.GetCurrentDirectory() + "\\nlog.config";
