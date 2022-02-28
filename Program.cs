@@ -47,7 +47,6 @@ namespace TicketSystem
                         int idx = line.IndexOf('"');
                         if (idx == -1)
                         {
-                            /*   
                             // no quote = no comma in movie title
                             // movie details are separated with comma(,)
                             string[] ticketDetails = line.Split(',');
@@ -62,7 +61,6 @@ namespace TicketSystem
                             Submitter.Add(ticketDetails[4].Replace("|", ", "));
                             Assigned.Add(ticketDetails[5].Replace("|", ", "));
                             Watching.Add(ticketDetails[6].Replace("|", ", "));
-                            */
                         }
                         else
                         {
