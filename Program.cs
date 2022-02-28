@@ -42,7 +42,26 @@ namespace TicketSystem
                     while (!sr.EndOfStream)
                     {
                         string line = sr.ReadLine();
-                        Console.WriteLine(line);
+                        // first look for quote(") in string
+                        // this indicates a comma(,) in movie title
+                        int idx = line.IndexOf('"');
+                        if (idx == -1)
+                        {
+                            // no quote = no comma in movie title
+                            // movie details are separated with comma(,)
+                            string[] ticketDetails = line.Split(',');
+                            // 1st array element contains movie id
+                            TicketIds.Add(UInt64.Parse(ticketDetails[0]));
+                            // 2nd array element contains movie title
+                            Summary.Add(ticketDetails[1]);
+                            // 3rd array element contains movie genre(s)
+                            // replace "|" with ", "
+                            Status.Add(ticketDetails[2].Replace("|", ", "));
+                            Priority.Add(ticketDetails[3].Replace("|", ", "));
+                            Submitter.Add(ticketDetails[4].Replace("|", ", "));
+                            Assigned.Add(ticketDetails[5].Replace("|", ", "));
+                            Watching.Add(ticketDetails[6].Replace("|", ", "));
+                        }
                     }
                     sr.Close();
                 }
