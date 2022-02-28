@@ -47,6 +47,7 @@ namespace TicketSystem
                         int idx = line.IndexOf('"');
                         if (idx == -1)
                         {
+                            /*   
                             // no quote = no comma in movie title
                             // movie details are separated with comma(,)
                             string[] ticketDetails = line.Split(',');
@@ -61,10 +62,33 @@ namespace TicketSystem
                             Submitter.Add(ticketDetails[4].Replace("|", ", "));
                             Assigned.Add(ticketDetails[5].Replace("|", ", "));
                             Watching.Add(ticketDetails[6].Replace("|", ", "));
+                            */
                         }
+                        else
+                        {
+                            // quote = comma in movie title
+                            // extract the movieId
+                            TicketIds.Add(UInt64.Parse(line.Substring(0, idx - 1)));
+                            // remove movieId and first quote from string
+                            line = line.Substring(idx + 1);
+                            // find the next quote
+                            idx = line.IndexOf('"');
+                            // extract the movieTitle
+                            Summary.Add(line.Substring(0, idx));
+                            // remove title and last comma from the string
+                            line = line.Substring(idx + 2);
+                            // replace the "|" with ", "
+                            Status.Add(line.Replace("|", ", "));
+                            Priority.Add(line.Replace("|", ", "));
+                            Submitter.Add(line.Replace("|", ", "));
+                            Assigned.Add(line.Replace("|", ", "));
+                            Watching.Add(line.Replace("|", ", "));
+                        }
+
                     }
                     sr.Close();
                 }
+
                 catch (Exception ex)
                 {
                     logger.Error(ex.Message);
