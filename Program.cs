@@ -146,28 +146,38 @@ namespace TicketSystem
                             string status;
                             do
                             {
-                                // ask user to enter genre
-                                Console.WriteLine("Enter genre (or done to quit)");
-                                // input genre
+                                // ask user to enter status
+                                Console.WriteLine("Enter status (or done to quit)");
+                                // input status
                                 status = Console.ReadLine();
                                 // if user enters "done"
-                                // or does not enter a genre do not add it to list
+                                // or does not enter a status do not add it to list
                                 if (status != "done" && status.Length > 0)
                                 {
                                     statuses.Add(status);
                                 }
                             } while (status != "done");
-                            // specify if no genres are entered
+                            // specify if no status are entered
                             if (statuses.Count == 0)
                             {
                                 statuses.Add("(no status listed)");
                             }
-                            // use "|" as delimeter for genres
+                            // use "|" as delimeter for status
                             string statusesString = string.Join("|", statuses);
                             // if there is a comma(,) in the title, wrap it in quotes
                             ticketSummary = Summary.IndexOf(",") != -1 ? $"\"{Summary}\"" : ticketSummary;
-                            // display movie id, title, genres
-                            Console.WriteLine($"{ticketId},{ticketSummary},{statusesString}");
+                            //Console.WriteLine($"{ticketId},{ticketSummary},{statusesString}");
+
+                             // create file from data
+                            StreamWriter sw = new StreamWriter(file, true);
+                            sw.WriteLine($"{ticketId},{ticketSummary},{statusesString}");
+                            sw.Close();
+                            // add movie details to Lists
+                            TicketIds.Add(ticketId);
+                            Summary.Add(ticketSummary);
+                            Status.Add(statusesString);
+                            // log transaction
+                            logger.Info("Ticket id {Id} added", ticketId);
                         }
                     }
                 } while (choice == "1" || choice == "2");            }
