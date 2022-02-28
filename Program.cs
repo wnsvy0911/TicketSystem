@@ -2,6 +2,7 @@
 using NLog.Web;
 using System.IO;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TicketSystem
 {
@@ -126,6 +127,8 @@ namespace TicketSystem
                     else if (choice == "2")
                     {
                         // Create file from data
+                        UInt64 ticketId = TicketIds.Max() + 1;
+                        Console.WriteLine($"Ticket Id: {ticketId}");
                     }
                 } while (choice == "1" || choice == "2");            }
 
