@@ -109,7 +109,7 @@ namespace TicketSystem
 
                     if (choice == "1")
                     {
-                        //  Read data from CSV file
+                        // Read data from CSV file
                         // loop thru Movie Lists
                         for (int i = 0; i < TicketIds.Count; i++)
                         {
@@ -126,9 +126,49 @@ namespace TicketSystem
                     }
                     else if (choice == "2")
                     {
-                        // Create file from data
-                        UInt64 ticketId = TicketIds.Max() + 1;
-                        Console.WriteLine($"Ticket Id: {ticketId}");
+                        //Create file from data
+                        Console.WriteLine("Enter the ticket summary");
+                        // input summary
+                        string ticketSummary = Console.ReadLine();
+                        // check for duplicate summary
+                        List<string> LowerCaseTicketSummaries = Summary.ConvertAll(t => t.ToLower());
+                        if (LowerCaseTicketSummaries.Contains(ticketSummary.ToLower()))
+                        {
+                            logger.Info("Duplicate ticket summary {Summary}", ticketSummary);
+                        }
+                        else
+                        {
+                            // generate movie id - use max value in MovieIds + 1
+                            UInt64 ticketId = TicketIds.Max() + 1;
+
+                             // input status
+                            List<string> statuses = new List<string>();
+                            string status;
+                            do
+                            {
+                                // ask user to enter genre
+                                Console.WriteLine("Enter genre (or done to quit)");
+                                // input genre
+                                status = Console.ReadLine();
+                                // if user enters "done"
+                                // or does not enter a genre do not add it to list
+                                if (status != "done" && status.Length > 0)
+                                {
+                                    statuses.Add(status);
+                                }
+                            } while (status != "done");
+                            // specify if no genres are entered
+                            if (statuses.Count == 0)
+                            {
+                                statuses.Add("(no status listed)");
+                            }
+                            // use "|" as delimeter for genres
+                            string statusesString = string.Join("|", statuses);
+                            // if there is a comma(,) in the title, wrap it in quotes
+                            ticketSummary = Summary.IndexOf(",") != -1 ? $"\"{Summary}\"" : ticketSummary;
+                            // display movie id, title, genres
+                            Console.WriteLine($"{ticketId},{ticketSummary},{statusesString}");
+                        }
                     }
                 } while (choice == "1" || choice == "2");            }
 
