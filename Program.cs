@@ -24,8 +24,27 @@ namespace TicketSystem
             }
             else
             {
-                // TODO: create user menu
-            }
+                string choice;
+                do
+                {
+                    // display choices to user
+                    Console.WriteLine("1) Read data from CSV file");
+                    Console.WriteLine("2) Create file from data");
+                    Console.WriteLine("Enter to quit");
+
+                    // input selection
+                    choice = Console.ReadLine();
+                    logger.Info("User choice: {Choice}", choice);
+
+                    if (choice == "1")
+                    {
+                        //  Read data from CSV file
+                    }
+                    else if (choice == "2")
+                    {
+                        // Create file from data
+                    }
+                } while (choice == "1" || choice == "2");            }
 
 
             logger.Info("Program ended");
