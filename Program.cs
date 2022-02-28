@@ -1,7 +1,7 @@
 ﻿using System;
 using NLog.Web;
 using System.IO;
-
+using System.Collections.Generic;
 
 namespace TicketSystem
 {
@@ -24,6 +24,16 @@ namespace TicketSystem
             }
             else
             {
+                // create parallel lists of movie details
+                // lists are used since we do not know number of lines of data
+                List<UInt64> TicketIds = new List<UInt64>();
+                List<string> Summary = new List<string>();
+                List<string> Status = new List<string>();
+                List<string> Priority = new List<string>();
+                List<string> Submitter = new List<string>();
+                List<string> Assigned = new List<string>();
+                List<string> Watching = new List<string>();
+
                 string choice;
                 do
                 {
