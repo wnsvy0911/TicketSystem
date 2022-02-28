@@ -15,7 +15,7 @@ namespace TicketSystem
             var logger = NLogBuilder.ConfigureNLog(path).GetCurrentClassLogger();
             logger.Info("Program started");
 
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("TicketSystem");
             string file = "Tickets.csv";
              // make sure movie file exists
             if (!File.Exists(file))
@@ -86,6 +86,19 @@ namespace TicketSystem
                     if (choice == "1")
                     {
                         //  Read data from CSV file
+                        // loop thru Movie Lists
+                        for (int i = 0; i < TicketIds.Count; i++)
+                        {
+                            // display movie details
+                            Console.WriteLine($"Id: {TicketIds[i]}");
+                            Console.WriteLine($"Summary: {Summary[i]}");
+                            Console.WriteLine($"Status: {Status[i]}");
+                            Console.WriteLine($"Priority: {Priority[i]}");
+                            Console.WriteLine($"Submitter: {Submitter[i]}");
+                            Console.WriteLine($"Assigned: {Assigned[i]}");
+                            Console.WriteLine($"Watching: {Watching[i]}");
+                            Console.WriteLine();
+                        }
                     }
                     else if (choice == "2")
                     {
